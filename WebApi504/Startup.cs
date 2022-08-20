@@ -33,6 +33,7 @@ namespace WebApi504
                 options.UseSqlServer(Configuration["ConnectionStrings:DbConnection"])
                 .UseTriggers(triggerOptions => {
                     triggerOptions.AddTrigger<Triggers.UserLog>();
+                    triggerOptions.AddTrigger<Triggers.UserErasedLog>();
                 }));
 
             services.AddControllers();

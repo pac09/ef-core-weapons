@@ -32,5 +32,17 @@ namespace WebApi504.Controllers
             
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(int userId) 
+        {
+            var user = _context.Users.Find(userId);
+            _context.Users.Remove(user);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
     }
 }

@@ -2,23 +2,22 @@
 using System.Threading.Tasks;
 using System.Threading;
 using WebApi504.Data.Models;
-
 namespace WebApi504.Data.Triggers
 {
-    public class UserLog : IBeforeSaveTrigger<User>
+    public class UserErasedLog : IAfterSaveTrigger<User>
     {
         private readonly FinanceContext _context;
 
-        public UserLog(FinanceContext context)
+        public UserErasedLog(FinanceContext context)
         {
             _context = context;
         }
 
-        public Task BeforeSave(ITriggerContext<User> context, CancellationToken cancellationToken)
+        public Task AfterSave(ITriggerContext<User> context, CancellationToken cancellationToken) 
         {
             var newLog = new Log()
             {
-                Activity = "User successfully created"
+                Activity = "User successfully deleted"
             };
 
             _context.Add(newLog);
