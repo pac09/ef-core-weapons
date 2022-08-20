@@ -6,19 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApi504.Data.Models
 {
-    public partial class Loan
+    public partial class User
     {
         [Key]
-        public int LoanId { get; set; }
+        public int UserId { get; set; }
         public int PersonId { get; set; }
-        public long Amount { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime CreationDate { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? EndDate { get; set; }
+        [Required]
+        [StringLength(25)]
+        public string UserName { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Password { get; set; }
 
         [ForeignKey("PersonId")]
-        [InverseProperty("Loans")]
+        [InverseProperty("Users")]
         public virtual Person Person { get; set; }
     }
 }

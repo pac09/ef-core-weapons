@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
 namespace WebApi504.Data.Models
 {
     [Table("SocialSecurity")]
@@ -17,7 +15,7 @@ namespace WebApi504.Data.Models
         [Column(TypeName = "datetime")]
         public DateTime CreationDate { get; set; }
 
-        [ForeignKey(nameof(PersonId))]
+        [ForeignKey("PersonId")]
         [InverseProperty("SocialSecurities")]
         public virtual Person Person { get; set; }
     }

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi504.Data.Models;
+using Triggers = WebApi504.Data.Triggers;
 
 namespace WebApi504
 {
@@ -28,7 +29,11 @@ namespace WebApi504
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FinanceContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DbConnection"]));
+            services.AddDbContext<FinanceContext>(options => 
+                options.UseSqlServer(Configuration["ConnectionStrings:DbConnection"])
+                .UseTriggers(triggerOptions => {
+                    triggerOptions.AddTrigger<Triggers.UserLog>();
+                }));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
